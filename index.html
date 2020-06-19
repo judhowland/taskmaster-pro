@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <title>Taskmaster Pro</title>
 </head>
@@ -18,7 +19,8 @@
       <button id="create-task" class="btn btn-block btn-success" data-toggle="modal" data-target="#task-form-modal">Add
         Task</button>
       <button id="remove-tasks" class="btn btn-block btn-danger">Delete All Tasks</button>
-      <p class="mt-auto d-none d-lg-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas architecto ipsa
+      <p class="mt-auto d-none d-lg-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas
+        architecto ipsa
         excepturi aut non
         laudantium sequi fugit officiis optio deleniti asperiores rem eius laborum maxime blanditiis culpa, quis iste?
       </p>
@@ -32,12 +34,11 @@
               To Do
             </h4>
             <ul id="list-toDo" class="list-group list-group-flush">
-              <ul id="list-done" class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <span class="badge badge-primary badge-pill"></span>
+              <li class="list-group-item">
+                <span class="badge badge-primary badge-pill"></span>
                 <p class="m-1"></p>
-                </li>
-              </ul>
+              </li>
+            </ul>
           </div>
         </div>
         <!--To-Do End-->
@@ -85,14 +86,16 @@
             </ul>
           </div>
         </div>
-        <!-- Delete Bar at Bottom of Page -->
-        <div id="trash">
-          <div class="w-100 bg-danger p-3 text-center text-light display-4 mt-auto">
-            Drop Here to Remove.
-          </div>
+      </div>
+      <!-- Delete Bar at Bottom of Page -->
+      <div id="trash" class="mt-auto">
+        <div class="w-100 bg-danger p-3 text-center text-light display-4">
+          Drop Here to Remove.
         </div>
+      </div>
     </main>
   </div>
+
 
 
   <!-- Modal -->
@@ -126,7 +129,10 @@
     </div>
   </div>
 
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="./assets/js/script.js"></script>
