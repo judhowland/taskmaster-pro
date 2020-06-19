@@ -53,7 +53,7 @@ $(".list-group").on("click", "p", function () {
     .addClass("form-control")
     .val(text);
   $(this).replaceWith(textInput);
-  text.Input.trigger("focus");
+  textInput.trigger("focus");
 });
 
 $(".list-group").on("blur", "textarea", function () {
@@ -79,7 +79,7 @@ $(".list-group").on("blur", "textarea", function () {
   // recreate p element
   var taskP = $("<p")
     .addClass("m-1")
-    .tex(text);
+    .text(text);
 
   //replace textarea with p element
   $(this).replaceWith(taskP);
