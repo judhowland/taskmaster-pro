@@ -13,9 +13,36 @@ var createTask = function (taskText, taskDate, taskList) {
   // append span and p element to parent li
   taskLi.append(taskSpan, taskP);
 
+  // check due date
+  auditTask(taskLi);
 
   // append to ul list on the page
   $("#list-" + taskList).append(taskLi);
+
+};
+
+$("#modalDueDate").datepicker( {
+  minDate: 1
+});
+
+
+var auditTask = function (taskEl) {
+  // get date from task element
+  var date = $(taskEl).find("span").text().trim();
+
+  // convert to a moment object at 5:00pm
+  var time = moment(date, "L").set("hour", 17);
+  
+  // remove any old classes from element
+  $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
+
+  // apply new classes if task is near/overdue date
+  if (moment().isAfter(time)) {
+    $(taskEl).addClass("list-group-item-danger");
+  }
+  else if (Math.abs(moment().diff(time, "days")) <= 2) {
+    $(taskEl).addClass("list-group-item-warning");
+  }
 };
 
 $(".card .list-group").sortable({
@@ -99,8 +126,8 @@ var loadTasks = function () {
   $.each(tasks, function (list, arr) {
     console.log(list, arr);
     // then loop over sub-array
-    arr.forEach(function (task) {
-      createTask(task.text, task.date, list);
+    arr.forEach(function (tasks) {
+      createTask(tasks.text, tasks.date, list);
     });
   });
 };
@@ -108,6 +135,7 @@ var loadTasks = function () {
 var saveTasks = function () {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
+
 
 $(".list-group").on("click", "p", function () {
   var text = $(this)
@@ -121,7 +149,7 @@ $(".list-group").on("click", "p", function () {
 });
 
 $(".list-group").on("blur", "textarea", function () {
-  // get the tgextarea's current value/text
+  // get the textarea's current value/text
   var text = $(this)
     .val()
     .trim();
@@ -141,7 +169,7 @@ $(".list-group").on("blur", "textarea", function () {
   saveTasks();
 
   // recreate p element
-  var taskP = $("<p")
+  var taskP = $("<p>")
     .addClass("m-1")
     .text(text);
 
@@ -165,12 +193,19 @@ $(".list-group").on("click", "span", function () {
   // swap out elements
   $(this).replaceWith(dateInput);
 
-  // automatically focus on new element
+  dateInput.datepicker({
+    minDate: 1,
+    onClose: function(){
+      $(this).trigger("change");
+    }
+  });
+
+  // automatically bring up the new calander
   dateInput.trigger("focus");
 });
 
 // value of due date was changed
-$(".list-group").on("blur", "input[type='text']", function () {
+$(".list-group").on("change", "input[type='text']", function () {
   // get current text
   var date = $(this)
     .val()
@@ -198,6 +233,9 @@ $(".list-group").on("blur", "input[type='text']", function () {
 
   // replace input with span element
   $(this).replaceWith(taskSpan);
+
+  // pass task's <li> element into auditTask() to check new due date
+  auditTask($(taskSpan).closest(".list-group-item"));
 });
 
 
